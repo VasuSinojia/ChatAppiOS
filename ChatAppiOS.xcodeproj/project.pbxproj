@@ -12,6 +12,7 @@
 		1816D71B2BFBDDDD00EB4241 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1816D71A2BFBDDDD00EB4241 /* FirebaseCrashlytics */; };
 		1816D71D2BFBDDDD00EB4241 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 1816D71C2BFBDDDD00EB4241 /* FirebaseFirestore */; };
 		1816D71F2BFBDDDD00EB4241 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 1816D71E2BFBDDDD00EB4241 /* FirebaseMessaging */; };
+		1816D7232BFBE0C900EB4241 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1816D7222BFBE0C900EB4241 /* GoogleService-Info.plist */; };
 		27FF2C8F2BF675A900A8F6D1 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FF2C8E2BF675A900A8F6D1 /* UserModel.swift */; };
 		6AAE98524004D203A7FF7F4F /* Pods_ChatAppiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2BA3BE6F563EDD5B91452A /* Pods_ChatAppiOS.framework */; };
 		BC11D0EC2B0754EE0078725C /* NewChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC11D0EB2B0754EE0078725C /* NewChatViewController.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1816D7222BFBE0C900EB4241 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		27FF2C8E2BF675A900A8F6D1 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		5C2BA3BE6F563EDD5B91452A /* Pods_ChatAppiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatAppiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC11D0EB2B0754EE0078725C /* NewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		BCE9CA442A54334600BF6589 /* ChatAppiOS */ = {
 			isa = PBXGroup;
 			children = (
+				1816D7222BFBE0C900EB4241 /* GoogleService-Info.plist */,
 				BCE9CA5E2A54340800BF6589 /* Resources */,
 				BCE9CA5D2A5433FF00BF6589 /* ViewModels */,
 				BCE9CA5C2A5433AE00BF6589 /* Models */,
@@ -327,6 +330,7 @@
 				BCEF503F2AFE27DE00C83707 /* ChatCellView.xib in Resources */,
 				BCC1CE842B05EA91004E1549 /* MyImageBubble.xib in Resources */,
 				BCE9CA4F2A54334800BF6589 /* Assets.xcassets in Resources */,
+				1816D7232BFBE0C900EB4241 /* GoogleService-Info.plist in Resources */,
 				BCE9CA4D2A54334600BF6589 /* Main.storyboard in Resources */,
 				BC11D0F02B075B130078725C /* NewChatTableViewCell.xib in Resources */,
 			);
