@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="YouImageBubble" rowHeight="248" id="Yaf-oy-MRw" customClass="YouImageBubble" customModule="ChatAppiOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="409" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="Yaf-oy-MRw" id="oEc-Gb-egy">
+                <rect key="frame" x="0.0" y="0.0" width="409" height="200"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j5X-3p-U4m">
+                        <rect key="frame" x="0.0" y="-2" width="409" height="200"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="Nwc-Hf-6Cr">
+                                <rect key="frame" x="15" y="145" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="5o5-0Q-gbG"/>
+                                    <constraint firstAttribute="width" constant="40" id="y8N-ey-d6Q"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="chi-1d-p6t" userLabel="You Image View">
+                                <rect key="frame" x="70" y="10" width="170" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="zLy-dd-XKU"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="200" id="4yT-0k-dkg"/>
+                            <constraint firstItem="chi-1d-p6t" firstAttribute="top" secondItem="j5X-3p-U4m" secondAttribute="top" constant="10" id="682-Fu-Wbo"/>
+                            <constraint firstAttribute="bottom" secondItem="chi-1d-p6t" secondAttribute="bottom" constant="10" id="RuI-LF-jH6"/>
+                            <constraint firstItem="chi-1d-p6t" firstAttribute="leading" secondItem="Nwc-Hf-6Cr" secondAttribute="trailing" constant="15" id="hhc-Ay-ZeY"/>
+                            <constraint firstItem="Nwc-Hf-6Cr" firstAttribute="leading" secondItem="j5X-3p-U4m" secondAttribute="leading" constant="15" id="oF3-j7-p8h"/>
+                            <constraint firstAttribute="bottom" secondItem="Nwc-Hf-6Cr" secondAttribute="bottom" constant="15" id="uDN-e2-ZKu"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" name="chat_screen_bg_color"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="j5X-3p-U4m" secondAttribute="bottom" id="79n-fR-sE0"/>
+                    <constraint firstItem="j5X-3p-U4m" firstAttribute="leading" secondItem="oEc-Gb-egy" secondAttribute="leading" id="hd9-rL-D9r"/>
+                    <constraint firstAttribute="trailing" secondItem="j5X-3p-U4m" secondAttribute="trailing" id="rVO-wO-HsZ"/>
+                    <constraint firstItem="j5X-3p-U4m" firstAttribute="top" secondItem="oEc-Gb-egy" secondAttribute="top" constant="-2" id="wKe-3C-TW0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="pch-xp-Yth"/>
+            <connections>
+                <outlet property="youImageView" destination="chi-1d-p6t" id="hHY-YC-XHi"/>
+            </connections>
+            <point key="canvasLocation" x="196.18320610687022" y="4.2253521126760569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="profile" width="170.66667175292969" height="170.66667175292969"/>
+        <namedColor name="chat_screen_bg_color">
+            <color red="0.16099999845027924" green="0.18400000035762787" blue="0.24699999392032623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
