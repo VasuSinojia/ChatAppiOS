@@ -12,7 +12,7 @@ class MyProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
-        navigationController?.navigationBar.tintColor = .whitefasdf
+        navigationController?.navigationBar.tintColor = .white
         // Do any additional setup after loading the view.
     }
     
