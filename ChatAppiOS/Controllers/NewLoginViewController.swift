@@ -22,7 +22,7 @@ class NewLoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        dataForTesting()
+        dataForTesting()
         self.navigationController?.navigationBar.isHidden = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(googleSignInBtnAction))
         googleBtn.addGestureRecognizer(gesture)
@@ -31,8 +31,8 @@ class NewLoginViewController: UIViewController {
     }
     
     private func dataForTesting() {
-        txtEmail.text = "azhar@gmail.com"
-        txtPassword.text = "123456789"
+        txtEmail.text = "sinojiavasu321@gmail.com"
+        txtPassword.text = "12345678"
     }
     
     @IBAction func btnLoginAction(_ sender: Any) {
