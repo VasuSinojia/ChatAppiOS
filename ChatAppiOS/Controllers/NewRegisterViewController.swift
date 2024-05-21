@@ -48,6 +48,8 @@ class NewRegisterViewController: UIViewController {
                     DatabaseManager.sharedInstance.insertUser(user: user) { success in
                         if success {
                             print("Successfully Added the user")
+                            Config.showAlert(with: "Registration Successful", vc: self)
+                            self.navigationController?.popViewController(animated: true)
                         } else {
                             print("Error adding the user")
                         }
