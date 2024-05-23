@@ -44,7 +44,7 @@ class ChatListViewController: UIViewController {
     
     private func loadData() {
         var user = MyManager.getUserData()
-        txtMyName.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
+        txtUserName.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
     }
     
     
