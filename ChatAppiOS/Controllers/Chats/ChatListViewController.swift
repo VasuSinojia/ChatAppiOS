@@ -20,6 +20,7 @@ struct ChatUser {
 class ChatListViewController: UIViewController {
     
     @IBOutlet weak var chatListTableView: UITableView!
+    @IBOutlet weak var txtUserName: UILabel!
     private var chatList: [ChatUser] = []
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,7 +31,7 @@ class ChatListViewController: UIViewController {
         super.viewDidLoad()
         
         chatListTableView.register(UINib(nibName: "ChatCellView", bundle: nil), forCellReuseIdentifier: "cell")
-
+        loadData()
         initDelegate()
         chatList = [
             ChatUser(name: "Vasu", lastMessage: "Hi I am here", pendingMessage: 3, lastMessageDate: "Sun", isMe : false),
@@ -39,6 +40,11 @@ class ChatListViewController: UIViewController {
             ChatUser(name: "Asgar", lastMessage: "Happy Birthday Sir", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : false)
         ]
         // Do any additional setup after loading the view.
+    }
+    
+    private func loadData() {
+        var user = MyManager.getUserData()
+        txtMyName.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
     }
     
     
