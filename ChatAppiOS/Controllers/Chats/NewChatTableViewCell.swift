@@ -16,7 +16,7 @@ class NewChatTableViewCell: UITableViewCell {
     
     func loadData(user: UserModel) {
         userProfilePic.image = UIImage(named: "profile")
-        lblName.text = "\(user.firstName) \(user.lastName)"
+        lblName.text = "\(user.firstName ?? "") \(user.lastName ?? "")"
     }
 
     override func awakeFromNib() {
