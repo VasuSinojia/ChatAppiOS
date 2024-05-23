@@ -13,6 +13,7 @@
 		1816D71D2BFBDDDD00EB4241 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 1816D71C2BFBDDDD00EB4241 /* FirebaseFirestore */; };
 		1816D71F2BFBDDDD00EB4241 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 1816D71E2BFBDDDD00EB4241 /* FirebaseMessaging */; };
 		1816D7232BFBE0C900EB4241 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1816D7222BFBE0C900EB4241 /* GoogleService-Info.plist */; };
+		18D6C32D2BFFAF2E0098CB05 /* MyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6C32C2BFFAF2E0098CB05 /* MyManager.swift */; };
 		27FF2C8F2BF675A900A8F6D1 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FF2C8E2BF675A900A8F6D1 /* UserModel.swift */; };
 		6AAE98524004D203A7FF7F4F /* Pods_ChatAppiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2BA3BE6F563EDD5B91452A /* Pods_ChatAppiOS.framework */; };
 		BC11D0EC2B0754EE0078725C /* NewChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC11D0EB2B0754EE0078725C /* NewChatViewController.swift */; };
@@ -52,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		1816D7222BFBE0C900EB4241 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		18D6C32C2BFFAF2E0098CB05 /* MyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyManager.swift; sourceTree = "<group>"; };
 		27FF2C8E2BF675A900A8F6D1 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		5C2BA3BE6F563EDD5B91452A /* Pods_ChatAppiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatAppiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC11D0EB2B0754EE0078725C /* NewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewController.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				BC9C49C82A6E851D00C9879C /* Config.swift */,
 				BCE919552AFCC033001D09FA /* GradientView.swift */,
 				BCE9195A2AFCE85A001D09FA /* AppButton.swift */,
+				18D6C32C2BFFAF2E0098CB05 /* MyManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				BCD1C39C2A5C27CC000B8D05 /* ChatViewController.swift in Sources */,
 				BC9C49C92A6E851D00C9879C /* Config.swift in Sources */,
 				BCD1709F2A5D3863003566E6 /* NavigationManager.swift in Sources */,
+				18D6C32D2BFFAF2E0098CB05 /* MyManager.swift in Sources */,
 				BC2F90362A582AE500AB8D19 /* DatabaseManager.swift in Sources */,
 				BCE9195B2AFCE85A001D09FA /* AppButton.swift in Sources */,
 				BCEF50412AFE2BA900C83707 /* ChatCellView.swift in Sources */,

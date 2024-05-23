@@ -6,14 +6,35 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MyProfileViewController: UIViewController {
-
+    
+    @IBOutlet weak var myImage: UIImageView!
+    @IBOutlet weak var txtMyName: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = false
+        navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.tintColor = .white
+        loadData()
         // Do any additional setup after loading the view.
+    }
+    
+    
+    @IBAction func logoutBtnAction(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            navigationController?.popToRootViewController(animated: true)
+          } catch let error {
+            print("Error while logging out")
+          }
+    }
+    
+    private func loadData() {
+        var user = MyManager.getUserData()
+        txtMyName.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
     }
     
 

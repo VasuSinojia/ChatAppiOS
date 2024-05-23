@@ -47,7 +47,7 @@ class NewLoginViewController: UIViewController {
                 
                 if let authResult = authResult {
                     DatabaseManager.sharedInstance.getUser(uid: authResult.user.uid) { user in
-                        print("user id while login \(user.userId)")
+                        MyManager.setUserData(userModel: user)
                         let chatStoryBoard  = UIStoryboard(name: "Chat", bundle: nil)
                         let vc = chatStoryBoard.instantiateViewController(identifier: "ChatListViewController") as! ChatListViewController
                         self.navigationController?.pushViewController(vc, animated: true)

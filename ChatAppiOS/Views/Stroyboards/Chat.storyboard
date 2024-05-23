@@ -424,8 +424,8 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isCircular" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vasu Sinojia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxJ-Ro-1Pp">
-                                <rect key="frame" x="112.66666666666667" y="309" width="167.66666666666663" height="34"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxJ-Ro-1Pp">
+                                <rect key="frame" x="119.33333333333333" y="309" width="154.33333333333337" height="34"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="29"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -445,6 +445,9 @@
                                         <real key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="logoutBtnAction:" destination="gui-e4-R8I" eventType="touchUpInside" id="ubx-Le-jDp"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fL5-uJ-0Wg"/>
@@ -460,6 +463,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BIG-72-omf"/>
+                    <connections>
+                        <outlet property="myImage" destination="6U6-bw-DH2" id="arB-Br-RwK"/>
+                        <outlet property="txtMyName" destination="hxJ-Ro-1Pp" id="hvF-0z-ARs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="idX-zd-LFv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -485,7 +492,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
