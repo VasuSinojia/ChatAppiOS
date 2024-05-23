@@ -21,13 +21,15 @@ class DatabaseManager {
 //MARK: - User
 extension DatabaseManager {
     public func insertUser(user: UserModel, completionHandler: @escaping (Bool) -> Void) {
-//        firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_USER).addDocument(data: user.convertUserModelToDictionary(user: user),completion: { err in
-//            if let _ = err {
-//                completionHandler(false)
-//            } else {
-//                completionHandler(true)
-//            }
-//        })
+        let collectionRef = firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_USER)
+        do {
+            let documentRef = try collectionRef.addDocument(from: user)
+            print("Document written with ID: \(documentRef.documentID)")
+            completionHandler(true)
+        } catch let error {
+            print("Error adding document: \(error)")
+            completionHandler(false)
+        }
     }
     
     public func deleteUser() {

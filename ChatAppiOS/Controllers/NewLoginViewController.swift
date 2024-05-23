@@ -31,8 +31,8 @@ class NewLoginViewController: UIViewController {
     }
     
     private func dataForTesting() {
-        txtEmail.text = "azhar@gmail.com"
-        txtPassword.text = "123456789"
+        txtEmail.text = "sinojiavasu321@gmail.com"
+        txtPassword.text = "12345678"
     }
     
     @IBAction func btnLoginAction(_ sender: Any) {
@@ -40,13 +40,14 @@ class NewLoginViewController: UIViewController {
         if let email = txtEmail.text, let password = txtPassword.text {
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let error = error {
+                    print("error whiling loging in \(error)")
                     Config.showAlert(with: "\(error.localizedDescription)", vc: self)
                     return
                 }
                 
                 if let authResult = authResult {
                     DatabaseManager.sharedInstance.getUser(uid: authResult.user.uid) { user in
-                        print("user id while login \(user.userId)")
+                        MyManager.setUserData(userModel: user)
                         let chatStoryBoard  = UIStoryboard(name: "Chat", bundle: nil)
                         let vc = chatStoryBoard.instantiateViewController(identifier: "ChatListViewController") as! ChatListViewController
                         self.navigationController?.pushViewController(vc, animated: true)

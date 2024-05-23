@@ -43,11 +43,13 @@ class NewRegisterViewController: UIViewController {
                 }
                 
                 if let authResult = authResult {
-                    var user = UserModel(userId: authResult.user.uid, firstName: firstName, lastName: lastName, email: email, password: password, isActive: true, isOnline: true, image: "", lastSeen: 0)
+                    var user = UserModel(userId: authResult.user.uid, firstName: firstName, lastName: lastName, email: email, password: password)
                     
                     DatabaseManager.sharedInstance.insertUser(user: user) { success in
                         if success {
                             print("Successfully Added the user")
+                            Config.showAlert(with: "Registration Successful", vc: self)
+                            self.navigationController?.popViewController(animated: true)
                         } else {
                             print("Error adding the user")
                         }
