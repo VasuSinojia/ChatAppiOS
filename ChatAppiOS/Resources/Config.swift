@@ -35,4 +35,7 @@ class Constants {
     let KEY_IS_SIGN_IN = "isSignIn"
     let KEY_USER_ID = "userId"
     let KEY_IMAGE = "image"
+    
+    // User Defaults Constants
+    let ISLOGGEDIN = "isLoggedIn"
 }
