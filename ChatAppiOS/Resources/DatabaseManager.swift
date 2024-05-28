@@ -82,15 +82,67 @@ extension DatabaseManager {
 }
 
 extension DatabaseManager {
-    public func checkAndCreateNewConversation(conversationId: String,completionHandler: @escaping () -> Void) {
-        firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS).getDocuments { snapshot, error in
-            if let documents = snapshot?.documents {
-                let documentFound = documents.contains { $0.documentID == conversationId }
-                if !documentFound {
-                    self.firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS).document(conversationId).setData(["message" : "Hi"])
+    
+    // Checking if conversation exists (assuming you have opponentUID)
+    func getConversationId(withOpponentUID opponentUID: String, completion: @escaping (Bool, String?) -> Void) {
+        let currentUserID = MyManager.user.userId ?? ""
+      let conversationsRef = firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS)
+        conversationsRef.whereField(Constants.sharedInstance.KEY_PARTICIPANTS,arrayContains: currentUserID).getDocuments { (snapshot, error) in
+            if let _ = error {
+                completion(false , "")
+                return
+            }
+            
+            guard let documents = snapshot?.documents, !documents.isEmpty else {
+                self.createConversations(withOpponentUID: opponentUID) { isCreated, conversationId in
+                    if isCreated && !(conversationId?.isEmpty ?? true) {
+                        print("Created A conversation successfully")
+                        completion(true, conversationId)
+                    } else {
+                        print("Error createing a A conversation")
+                        completion(false, "")
+                    }
                 }
-                completionHandler()
+                return
+            }
+            
+            for document in documents {
+                let participants = document.data()[Constants.sharedInstance.KEY_PARTICIPANTS] as? [String]
+                if let participants = participants, participants.contains(currentUserID) && participants.contains(opponentUID) {
+                    let conversationID = document.documentID
+                    completion(true, conversationID)
+                    return
+                }
+            }
+            
+            self.createConversations(withOpponentUID: opponentUID) { isCreated, conversationId in
+                if isCreated && !(conversationId?.isEmpty ?? true) {
+                    print("Created A conversation successfully")
+                    completion(true, conversationId)
+                } else {
+                    print("Error createing a A conversation")
+                    completion(false, "")
+                }
             }
         }
+    }
+    
+    // Checking if conversation exists (assuming you have opponentUID)
+    func createConversations(withOpponentUID opponentUID: String, completion: @escaping (Bool, String?) -> Void) {
+        let currentUserID = MyManager.user.userId ?? ""
+        let conversationsRef = firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS).document()
+        let conversationID = conversationsRef.documentID
+        
+        conversationsRef.setData([
+            "id": conversationID,
+            "participants": [currentUserID, opponentUID],
+          ], completion: { (error) in
+            if let _ = error {
+              completion(false, "")
+              return
+            }
+          })
+        
+        completion(true, conversationID)
     }
 }

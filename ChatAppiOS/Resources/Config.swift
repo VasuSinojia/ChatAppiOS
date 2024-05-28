@@ -27,6 +27,7 @@ class Constants {
     let isLoggedIn = "isLoggedIn"
     let KEY_COLLECTION_USER = "users"
     let KEY_COLLECTION_CONVERSATIONS = "conversations"
+    let KEY_PARTICIPANTS = "participants"
     let KEY_NAME = "name"
     let KEY_EMAIL = "email"
     let KEY_PASSWORD = "password"
