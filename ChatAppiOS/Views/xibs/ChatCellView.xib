@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -34,36 +34,15 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isCircular" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kK-3a-8xj">
-                                                <rect key="frame" x="33" y="0.0" width="20" height="20"/>
-                                                <color key="backgroundColor" systemColor="systemRedColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="2e3-9X-g97"/>
-                                                    <constraint firstAttribute="width" constant="20" id="adT-fq-OGk"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
-                                                        <real key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCircular" value="YES"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="o1e-2l-3kN" firstAttribute="top" secondItem="RhF-tz-LsG" secondAttribute="top" constant="5" id="4KU-HM-BJN"/>
                                             <constraint firstAttribute="trailing" secondItem="o1e-2l-3kN" secondAttribute="trailing" constant="5" id="4xq-go-IhX"/>
                                             <constraint firstItem="o1e-2l-3kN" firstAttribute="leading" secondItem="RhF-tz-LsG" secondAttribute="leading" id="AXQ-Qj-2BH"/>
-                                            <constraint firstAttribute="trailing" secondItem="6kK-3a-8xj" secondAttribute="trailing" id="K7k-q9-dDA"/>
                                             <constraint firstAttribute="width" constant="53" id="O63-os-8q5"/>
-                                            <constraint firstAttribute="trailing" secondItem="6kK-3a-8xj" secondAttribute="trailing" id="RKG-1F-YPm"/>
                                             <constraint firstAttribute="bottom" secondItem="o1e-2l-3kN" secondAttribute="bottom" id="h1y-fN-Gy6"/>
                                             <constraint firstAttribute="height" constant="53" id="rRp-IM-pfe"/>
-                                            <constraint firstItem="6kK-3a-8xj" firstAttribute="top" secondItem="RhF-tz-LsG" secondAttribute="top" id="vYd-gT-1Ku"/>
-                                            <constraint firstAttribute="bottom" secondItem="6kK-3a-8xj" secondAttribute="bottom" constant="33" id="wP1-hH-st7"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wff-yS-5nc">
@@ -96,6 +75,23 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T33-eC-wgQ">
                                         <rect key="frame" x="468" y="0.0" width="80" height="53"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kK-3a-8xj">
+                                                <rect key="frame" x="61" y="3" width="24" height="24"/>
+                                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="X71-eB-87M"/>
+                                                    <constraint firstAttribute="height" constant="24" id="cdA-z0-xHk"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCircular" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 years ago" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHB-GL-X4X">
                                                 <rect key="frame" x="0.0" y="35" width="80" height="18"/>
                                                 <constraints>
@@ -111,6 +107,8 @@
                                             <constraint firstAttribute="trailing" secondItem="XHB-GL-X4X" secondAttribute="trailing" id="JeZ-Fw-Tns"/>
                                             <constraint firstItem="XHB-GL-X4X" firstAttribute="leading" secondItem="T33-eC-wgQ" secondAttribute="leading" id="O8t-bx-bRJ"/>
                                             <constraint firstAttribute="bottom" secondItem="XHB-GL-X4X" secondAttribute="bottom" id="cfN-uo-fFd"/>
+                                            <constraint firstItem="6kK-3a-8xj" firstAttribute="trailing" secondItem="XHB-GL-X4X" secondAttribute="trailing" constant="5" id="cwQ-gp-nbI"/>
+                                            <constraint firstItem="XHB-GL-X4X" firstAttribute="top" secondItem="6kK-3a-8xj" secondAttribute="bottom" constant="8" id="qAk-yf-oLs"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -161,10 +159,10 @@
             <color red="0.16099999845027924" green="0.18400000035762787" blue="0.24699999392032623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
