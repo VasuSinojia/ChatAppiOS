@@ -24,8 +24,6 @@ class NewLoginViewController: UIViewController {
         super.viewDidLoad()
         dataForTesting()
         self.navigationController?.navigationBar.isHidden = true
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(googleSignInBtnAction))
-        googleBtn.addGestureRecognizer(gesture)
         indicatorView = NVActivityIndicatorView(frame: indicatorFrame)
 //        let gesture2 = UITapGestureRecognizer(target: self, action: #selector(registerNowAction))
     }
@@ -72,48 +70,48 @@ class NewLoginViewController: UIViewController {
     }
     
     
-    @objc private func googleSignInBtnAction() {
-        guard let clientId = FirebaseApp.app()!.options.clientID else { return }
-        
-        let config = GIDConfiguration(clientID: clientId)
-        GIDSignIn.sharedInstance.configuration = config
-        
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) { result , error in
-            guard error == nil else {
-                // ...
-                return
-            }
-            
-            guard let user = result?.user, let idToken = user.idToken?.tokenString else {
-                return
-            }
-            
-            let credentials = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
-            
-            print("user name \(user.profile?.name)")
-            print("credentials \(credentials)")
-//            Auth.auth().signIn(with: credentials) { authResult, error in
-//                guard error == nil else {
-//                    print("Error while signing in\(String(describing: error))")
-//                    return
-//                }
-//                
-////                if let user = authResult?.user {
-////                    DatabaseManager.sharedInstance.userExist(with: user.uid) { exist in
-////                        if exist {
-////                            return
-////                        } else {
-////                            DatabaseManager.sharedInstance.insertUser(with: ChatAppUser(firstName: user.displayName ?? "", lastName: "", email: user.email ?? "", userId: user.uid)) { success in
-////                                UserDefaults.standard.setValue(user.email, forKey: "email")
-////                            }
-////                        }
-////                    }
-////                    UserDefaults.standard.set(true, forKey: Constants.sharedInstance.isLoggedIn)
-////                    NavigationManager.sharedInstance.changeRootNavController(storyboard: "Conversation", viewController: "tabBarController")
-////                }
-//            }
-        }
-    }
+//    @objc private func googleSignInBtnAction() {
+//        guard let clientId = FirebaseApp.app()!.options.clientID else { return }
+//        
+//        let config = GIDConfiguration(clientID: clientId)
+//        GIDSignIn.sharedInstance.configuration = config
+//        
+////        GIDSignIn.sharedInstance.signIn(withPresenting: self) { result , error in
+////            guard error == nil else {
+////                // ...
+////                return
+////            }
+////            
+////            guard let user = result?.user, let idToken = user.idToken?.tokenString else {
+////                return
+////            }
+////            
+////            let credentials = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
+////            
+////            print("user name \(user.profile?.name)")
+////            print("credentials \(credentials)")
+//////            Auth.auth().signIn(with: credentials) { authResult, error in
+//////                guard error == nil else {
+//////                    print("Error while signing in\(String(describing: error))")
+//////                    return
+//////                }
+//////                
+////////                if let user = authResult?.user {
+////////                    DatabaseManager.sharedInstance.userExist(with: user.uid) { exist in
+////////                        if exist {
+////////                            return
+////////                        } else {
+////////                            DatabaseManager.sharedInstance.insertUser(with: ChatAppUser(firstName: user.displayName ?? "", lastName: "", email: user.email ?? "", userId: user.uid)) { success in
+////////                                UserDefaults.standard.setValue(user.email, forKey: "email")
+////////                            }
+////////                        }
+////////                    }
+////////                    UserDefaults.standard.set(true, forKey: Constants.sharedInstance.isLoggedIn)
+////////                    NavigationManager.sharedInstance.changeRootNavController(storyboard: "Conversation", viewController: "tabBarController")
+////////                }
+//////            }
+////        }
+//    }
     let textView = UITextView(frame: CGRect.zero)
     let label = UITextView(frame: CGRect.zero)
 
