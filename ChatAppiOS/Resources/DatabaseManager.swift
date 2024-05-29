@@ -145,4 +145,11 @@ extension DatabaseManager {
         
         completion(true, conversationID)
     }
+    
+    func fetchChatsFromConversationId(conversationId: String) -> Void {
+        let chats = firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS).document(conversationId).collection(Constants.sharedInstance.KEY_CHATS).addSnapshotListener { snapshot, error in
+            let documents = snapshot?.documents
+            print("documents \(documents ?? [])")
+        }
+    }
 }

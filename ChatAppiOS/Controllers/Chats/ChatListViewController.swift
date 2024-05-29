@@ -29,7 +29,7 @@ class ChatListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        DatabaseManager.sharedInstance.fetchChatsFromConversationId(conversationId: "9dj4zUt8LZmeGOicNQS2")
         chatListTableView.register(UINib(nibName: "ChatCellView", bundle: nil), forCellReuseIdentifier: "cell")
         loadData()
         initDelegate()
