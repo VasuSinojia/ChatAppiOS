@@ -14,7 +14,6 @@ class DatabaseManager {
     
     static let sharedInstance = DatabaseManager()
     
-//    private let database = FirebaseDatabase.Database.database().reference()
     private let firestoreDB = Firestore.firestore()
 }
 
