@@ -29,16 +29,20 @@ class ChatListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Task {
+            let conversationList = try? await DatabaseManager.sharedInstance.fetchMyConversations()
+            if let conversations = conversationList {
+                for conversation in conversations {
+                    chatList.append(ChatUser(name: "\(conversation.firstName ?? "") \(conversation.lastName ?? "")", lastMessage: "hi", pendingMessage: 2, lastMessageDate: "Sun", isMe: false))
+                }
+            }
+            chatListTableView.reloadData()
+        }
         DatabaseManager.sharedInstance.fetchChatsFromConversationId(conversationId: "9dj4zUt8LZmeGOicNQS2")
         chatListTableView.register(UINib(nibName: "ChatCellView", bundle: nil), forCellReuseIdentifier: "cell")
         loadData()
         initDelegate()
-        chatList = [
-            ChatUser(name: "Vasu", lastMessage: "Hi I am here", pendingMessage: 3, lastMessageDate: "Sun", isMe : false),
-            ChatUser(name: "Zahir", lastMessage: "Andriod Studio Upgraded", pendingMessage: 2, lastMessageDate: "Wed", isMe : false),
-            ChatUser(name: "Ajju bhai", lastMessage: "Score to jo lala", pendingMessage: 1, lastMessageDate: "Today", isMe : false),
-            ChatUser(name: "Asgar", lastMessage: "Happy Birthday Sir", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : false)
-        ]
         // Do any additional setup after loading the view.
     }
     

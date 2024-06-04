@@ -78,9 +78,56 @@ extension DatabaseManager {
             }
         }
     }
+    
+    public func getAsyncUser(uid: String) async throws -> UserModel? {
+        let collectionRef = firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_USER)
+        let documentsSnapshot = try? await collectionRef.whereField("userId", isEqualTo: uid).getDocuments()
+        if !(documentsSnapshot?.isEmpty ?? true) {
+            if let documents = documentsSnapshot?.documents {
+                for document in documents {
+                    do {
+                        let data = try JSONSerialization.data(withJSONObject: document.data())
+                        let userModel = try? JSONDecoder().decode(UserModel.self, from: data)
+                        return userModel ?? UserModel()
+                    } catch {
+                        
+                    }
+                }
+            }
+        }
+        return nil
+    }
 }
 
 extension DatabaseManager {
+    
+    func fetchMyConversations() async throws -> [UserModel] {
+        let currentUserID = MyManager.user.userId ?? ""
+        let conversationsRef = firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS)
+        
+        let documentsSnapshot = try await conversationsRef.whereField(Constants.sharedInstance.KEY_PARTICIPANTS, arrayContains: currentUserID).getDocuments()
+        
+        var conversationList : [UserModel] = []
+        
+        if (!documentsSnapshot.isEmpty) {
+            for document in documentsSnapshot.documents {
+                let data = document.data()
+                let participants = data["participants"] as! [String]
+                let opponent = participants.first { ele in
+                    ele != currentUserID
+                }
+                if let opponentId = opponent {
+                    let receivedUser = try? await getAsyncUser(uid: opponentId)
+                    if let user = receivedUser {
+                        conversationList.append(user)
+                    }
+                }
+            }
+            return conversationList
+        }
+        
+     return conversationList
+    }
     
     // Checking if conversation exists (assuming you have opponentUID)
     func getConversationId(withOpponentUID opponentUID: String, completion: @escaping (Bool, String?) -> Void) {
