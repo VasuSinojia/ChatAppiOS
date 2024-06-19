@@ -14,6 +14,8 @@
 		1816D71F2BFBDDDD00EB4241 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 1816D71E2BFBDDDD00EB4241 /* FirebaseMessaging */; };
 		1816D7232BFBE0C900EB4241 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1816D7222BFBE0C900EB4241 /* GoogleService-Info.plist */; };
 		182BED1E2C064DD0009E62DB /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182BED1D2C064DD0009E62DB /* LocalDataManager.swift */; };
+		187E80882C236C0E000D555E /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E80872C236C0E000D555E /* ChatMessage.swift */; };
+		187E808A2C236C69000D555E /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E80892C236C69000D555E /* Enums.swift */; };
 		18D6C32D2BFFAF2E0098CB05 /* MyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6C32C2BFFAF2E0098CB05 /* MyManager.swift */; };
 		18D6C32F2BFFBC100098CB05 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 18D6C32E2BFFBC100098CB05 /* FirebasePerformance */; };
 		27FF2C8F2BF675A900A8F6D1 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FF2C8E2BF675A900A8F6D1 /* UserModel.swift */; };
@@ -35,7 +37,6 @@
 		BCC1CE872B05EC24004E1549 /* YouImageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC1CE852B05EC24004E1549 /* YouImageBubble.swift */; };
 		BCC1CE882B05EC24004E1549 /* YouImageBubble.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCC1CE862B05EC24004E1549 /* YouImageBubble.xib */; };
 		BCD1709F2A5D3863003566E6 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD1709E2A5D3863003566E6 /* NavigationManager.swift */; };
-		BCD1C39C2A5C27CC000B8D05 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD1C39B2A5C27CC000B8D05 /* ChatViewController.swift */; };
 		BCE919562AFCC033001D09FA /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE919552AFCC033001D09FA /* GradientView.swift */; };
 		BCE919592AFCC678001D09FA /* NewLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE919582AFCC678001D09FA /* NewLoginViewController.swift */; };
 		BCE9195B2AFCE85A001D09FA /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE9195A2AFCE85A001D09FA /* AppButton.swift */; };
@@ -56,6 +57,8 @@
 /* Begin PBXFileReference section */
 		1816D7222BFBE0C900EB4241 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		182BED1D2C064DD0009E62DB /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
+		187E80872C236C0E000D555E /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		187E80892C236C69000D555E /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		18D6C32C2BFFAF2E0098CB05 /* MyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyManager.swift; sourceTree = "<group>"; };
 		27FF2C8E2BF675A900A8F6D1 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		5C2BA3BE6F563EDD5B91452A /* Pods_ChatAppiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatAppiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,7 +79,6 @@
 		BCC1CE852B05EC24004E1549 /* YouImageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouImageBubble.swift; sourceTree = "<group>"; };
 		BCC1CE862B05EC24004E1549 /* YouImageBubble.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YouImageBubble.xib; sourceTree = "<group>"; };
 		BCD1709E2A5D3863003566E6 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
-		BCD1C39B2A5C27CC000B8D05 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		BCE919552AFCC033001D09FA /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		BCE919582AFCC678001D09FA /* NewLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLoginViewController.swift; sourceTree = "<group>"; };
 		BCE9195A2AFCE85A001D09FA /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
@@ -127,7 +129,6 @@
 		BCD1C39A2A5C27BA000B8D05 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
-				BCD1C39B2A5C27CC000B8D05 /* ChatViewController.swift */,
 				BC1EF7752AFE4923008CC396 /* ChatInteractionWindow.swift */,
 				BC1EF7712AFE4693008CC396 /* MyMessageBubble.swift */,
 				BC1EF7722AFE4693008CC396 /* MyMessageBubble.xib */,
@@ -212,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				27FF2C8E2BF675A900A8F6D1 /* UserModel.swift */,
+				187E80872C236C0E000D555E /* ChatMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -239,6 +241,7 @@
 				BCE9195A2AFCE85A001D09FA /* AppButton.swift */,
 				18D6C32C2BFFAF2E0098CB05 /* MyManager.swift */,
 				182BED1D2C064DD0009E62DB /* LocalDataManager.swift */,
+				187E80892C236C69000D555E /* Enums.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -412,7 +415,8 @@
 				BC1EF7792AFE4D94008CC396 /* YouMessageBubble.swift in Sources */,
 				BCE9CA462A54334600BF6589 /* AppDelegate.swift in Sources */,
 				BCE9CA482A54334600BF6589 /* SceneDelegate.swift in Sources */,
-				BCD1C39C2A5C27CC000B8D05 /* ChatViewController.swift in Sources */,
+				187E808A2C236C69000D555E /* Enums.swift in Sources */,
+				187E80882C236C0E000D555E /* ChatMessage.swift in Sources */,
 				BC9C49C92A6E851D00C9879C /* Config.swift in Sources */,
 				BCD1709F2A5D3863003566E6 /* NavigationManager.swift in Sources */,
 				18D6C32D2BFFAF2E0098CB05 /* MyManager.swift in Sources */,
