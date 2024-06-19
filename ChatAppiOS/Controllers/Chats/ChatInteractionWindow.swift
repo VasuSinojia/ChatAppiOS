@@ -14,6 +14,7 @@ class ChatInteractionWindow: UIViewController {
     
     private var chatList: [ChatUser] = []
     let imagePicker = UIImagePickerController()
+    var conversationId: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,22 +30,22 @@ class ChatInteractionWindow: UIViewController {
         
         initNavbar()
         setProfileViewToNavBar()
-        chatList = [
-            ChatUser(name: "Vasu", lastMessage: "Anybody affected by coronavirus?", pendingMessage: 3, lastMessageDate: "Sun", isMe : false),
-            ChatUser(name: "Zahir", lastMessage: "At out office 3 ppl are infected. We work from home.", pendingMessage: 2, lastMessageDate: "Wed", isMe : true),
-            ChatUser(name: "Ajju bhai", lastMessage: "This is our new manager, She will join chat. Her name is Ola.", pendingMessage: 1, lastMessageDate: "Today", isMe : false),
-            ChatUser(name: "Asgar", lastMessage: "Hello everybody! I’m Ola.", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : true),
-            ChatUser(name: "Asgar", lastMessage: "Hi Ola!", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : false),
-            ChatUser(name: "Asgar", lastMessage: "Hello, hw are you? This is out ream chat, you can write here about your projects. I heared you have experience in marketing, I would like to hear more about it. We need to focuse more on promoting our products.", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : true),
-            ChatUser(name: "Asgar", lastMessage: "I commented on Figma, I want to add some fancy icons. Do you have any icon set?", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : false),
-            ChatUser(name: "Asgar", lastMessage: "I am in a process of designing some. When do you need them?", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : false),
-            ChatUser(name: "Asgar", lastMessage: "Next month?", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : true),
-            ChatUser(name: "Asgar", lastMessage: "I am almost finish. Please give me your email, I will ZIP them and send you as son as im finish.", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : true),
-            ChatUser(name: "Asgar", lastMessage: "maciej.kowalski@email.com", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : false, isImage: true, image: UIImage(named: "profile")),
-            ChatUser(name: "Asgar", lastMessage: "Uploaded file.", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : true),
-            ChatUser(name: "Asgar", lastMessage: "How is koronavirus?", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : false),
-            ChatUser(name: "Asgar", lastMessage: "Will do, super, thank you.", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : true),
-        ]
+//        chatList = [
+//            ChatUser(name: "Vasu", lastMessage: "Anybody affected by coronavirus?", pendingMessage: 3, lastMessageDate: "Sun", isMe : false),
+//            ChatUser(name: "Zahir", lastMessage: "At out office 3 ppl are infected. We work from home.", pendingMessage: 2, lastMessageDate: "Wed", isMe : true),
+//            ChatUser(name: "Ajju bhai", lastMessage: "This is our new manager, She will join chat. Her name is Ola.", pendingMessage: 1, lastMessageDate: "Today", isMe : false),
+//            ChatUser(name: "Asgar", lastMessage: "Hello everybody! I’m Ola.", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : true),
+//            ChatUser(name: "Asgar", lastMessage: "Hi Ola!", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : false),
+//            ChatUser(name: "Asgar", lastMessage: "Hello, hw are you? This is out ream chat, you can write here about your projects. I heared you have experience in marketing, I would like to hear more about it. We need to focuse more on promoting our products.", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : true),
+//            ChatUser(name: "Asgar", lastMessage: "I commented on Figma, I want to add some fancy icons. Do you have any icon set?", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : false),
+//            ChatUser(name: "Asgar", lastMessage: "I am in a process of designing some. When do you need them?", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : false),
+//            ChatUser(name: "Asgar", lastMessage: "Next month?", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : true),
+//            ChatUser(name: "Asgar", lastMessage: "I am almost finish. Please give me your email, I will ZIP them and send you as son as im finish.", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : true),
+//            ChatUser(name: "Asgar", lastMessage: "maciej.kowalski@email.com", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : false, isImage: true, image: UIImage(named: "profile")),
+//            ChatUser(name: "Asgar", lastMessage: "Uploaded file.", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : true),
+//            ChatUser(name: "Asgar", lastMessage: "How is koronavirus?", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : false),
+//            ChatUser(name: "Asgar", lastMessage: "Will do, super, thank you.", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : true),
+//        ]
         
         scrollTableViewToBottom()
         // Do any additional setup after loading the view.
@@ -59,7 +60,7 @@ class ChatInteractionWindow: UIViewController {
         let saveAction = UIAlertAction(title: "Save", style: UIAlertAction.Style.default, handler: { [self] alert -> Void in
             let firstTextField = alertController.textFields![0] as UITextField
             print(firstTextField.text ?? "Nothing")
-            chatList[index] = ChatUser(name: "Asgar", lastMessage: firstTextField.text!, pendingMessage: 0, lastMessageDate: "", isMe: true)
+//            chatList[index] = ChatUser(name: "Asgar", lastMessage: firstTextField.text!, pendingMessage: 0, lastMessageDate: "", isMe: true)
             reloadTableView()
 
         })
@@ -83,7 +84,7 @@ class ChatInteractionWindow: UIViewController {
     
     private func scrollTableViewToBottom() {
         let indexPath = IndexPath(row: self.chatList.count - 1, section: 0)
-        self.tblChatBubbles.scrollToRow(at: indexPath, at: .bottom, animated: true)
+//        self.tblChatBubbles.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
     
     private func reloadTableView() {
@@ -92,6 +93,15 @@ class ChatInteractionWindow: UIViewController {
     
     private func clearTextField() {
         messsageTextField.text = ""
+    }
+    
+    private func sendMessage() {
+        let messageText = messsageTextField.text ?? ""
+        let userId = MyManager.user.userId ?? ""
+        let message = ChatMessage(message: messageText, messageType: .TEXT, senderId: userId)
+        if (conversationId != nil) {
+            DatabaseManager.sharedInstance.sendMessage(conversationId: conversationId!, chatMessage: message)
+        }
     }
     
     private func setProfileViewToNavBar() {
@@ -121,10 +131,13 @@ class ChatInteractionWindow: UIViewController {
     @IBAction func sendMessageAction(_ sender: Any) {
         
         if (!messsageTextField.text.isEmpty) {
-            chatList.append(ChatUser(name: "Asgar", lastMessage: messsageTextField.text, pendingMessage: 0, lastMessageDate: "", isMe: true))
+            
+//            chatList.append(ChatUser(name: "Asgar", lastMessage: messsageTextField.text, pendingMessage: 0, lastMessageDate: "", isMe: true))
+            
+            sendMessage()
             clearTextField()
             reloadTableView()
-            scrollTableViewToBottom()
+//            scrollTableViewToBottom()
         }
     }
     
@@ -219,7 +232,7 @@ extension ChatInteractionWindow: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let pickedImage = info[.originalImage] as? UIImage else { return }
         self.imagePicker.dismiss(animated: true)
-        chatList.append(ChatUser(name: "", lastMessage: "", pendingMessage: 0, lastMessageDate: "", isMe: true, isImage: true, image: pickedImage))
+//        chatList.append(ChatUser(name: "", lastMessage: "", pendingMessage: 0, lastMessageDate: "", isMe: true, isImage: true, image: pickedImage))
         reloadTableView()
         scrollTableViewToBottom()
     }
@@ -266,7 +279,7 @@ extension ChatInteractionWindow: GrowingTextViewDelegate {
     func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
        UIView.animate(withDuration: 0.2) {
            self.view.layoutIfNeeded()
-           self.scrollTableViewToBottom()
+//           self.scrollTableViewToBottom()
        }
     }
 }
