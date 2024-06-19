@@ -14,8 +14,8 @@ class YouMessageBubble: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    func loadData(chatUser: ChatUser) {
-        self.txtMessage.text = chatUser.lastMessage
+    func loadData(chatUser: ChatMessage) {
+        self.txtMessage.text = chatUser.message
         
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
