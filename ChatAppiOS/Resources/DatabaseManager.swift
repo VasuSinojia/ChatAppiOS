@@ -199,3 +199,14 @@ extension DatabaseManager {
         }
     }
 }
+
+extension DatabaseManager {
+    func sendMessage(conversationId: String, chatMessage: ChatMessage) {
+        let message = chatMessageToDictionary(message: chatMessage)
+        let chats = firestoreDB
+            .collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS)
+            .document(conversationId)
+            .collection(Constants.sharedInstance.KEY_CHATS)
+            .addDocument(data: message)
+    }
+}
