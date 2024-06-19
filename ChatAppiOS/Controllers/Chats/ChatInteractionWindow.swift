@@ -12,7 +12,7 @@ class ChatInteractionWindow: UIViewController {
     @IBOutlet weak var tblChatBubbles: UITableView!
     @IBOutlet weak var messsageTextField: GrowingTextView!
     
-    private var chatList: [ChatUser] = []
+    private var chatList: [ChatMessage] = []
     let imagePicker = UIImagePickerController()
     var conversationId: String?
 
@@ -30,6 +30,10 @@ class ChatInteractionWindow: UIViewController {
         
         initNavbar()
         setProfileViewToNavBar()
+        Task {
+            chatList = try await DatabaseManager.sharedInstance.fetchChatsFromConversationId(conversationId: conversationId ?? "")
+            reloadTableView()
+        }
 //        chatList = [
 //            ChatUser(name: "Vasu", lastMessage: "Anybody affected by coronavirus?", pendingMessage: 3, lastMessageDate: "Sun", isMe : false),
 //            ChatUser(name: "Zahir", lastMessage: "At out office 3 ppl are infected. We work from home.", pendingMessage: 2, lastMessageDate: "Wed", isMe : true),
@@ -183,33 +187,33 @@ class ChatInteractionWindow: UIViewController {
         if sender.state == .began {
             let touchPoint = sender.location(in: tblChatBubbles)
             if let indexPath = tblChatBubbles.indexPathForRow(at: touchPoint) {
-                showDeleteWarning(user: chatList[indexPath.row], index: indexPath.row)
+//                showDeleteWarning(user: chatList[indexPath.row], index: indexPath.row)
             }
         }
     }
     
-    private func showDeleteWarning(user: ChatUser, index: Int) {
-        let alertController  = UIAlertController(title: "Do you want to delete this message?", message: user.lastMessage, preferredStyle: .alert)
-        let editButton = UIAlertAction(title: "Edit", style: .default, handler: { _ in
-            self.editHandler(message_text: self.chatList[index].lastMessage, index: index)
-        })
-        let deleteButton = UIAlertAction(title: "Delete for me", style: .default, handler: { _ in
-            self.chatList.remove(at: index)
-            self.reloadTableView()
-        })
-        let deleteEveryOneButton = UIAlertAction(title: "Delete for everyone", style: .default, handler: { _ in })
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            (action : UIAlertAction!) -> Void in })
-        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
-
-        if user.isMe {
-            alertController.addAction(editButton)
-            alertController.addAction(deleteEveryOneButton)
-        }
-        alertController.addAction(deleteButton)
-        alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
+//    private func showDeleteWarning(user: ChatUser, index: Int) {
+//        let alertController  = UIAlertController(title: "Do you want to delete this message?", message: user.lastMessage, preferredStyle: .alert)
+//        let editButton = UIAlertAction(title: "Edit", style: .default, handler: { _ in
+//            self.editHandler(message_text: self.chatList[index].lastMessage, index: index)
+//        })
+//        let deleteButton = UIAlertAction(title: "Delete for me", style: .default, handler: { _ in
+//            self.chatList.remove(at: index)
+//            self.reloadTableView()
+//        })
+//        let deleteEveryOneButton = UIAlertAction(title: "Delete for everyone", style: .default, handler: { _ in })
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+//            (action : UIAlertAction!) -> Void in })
+//        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+//
+//        if user.isMe {
+//            alertController.addAction(editButton)
+//            alertController.addAction(deleteEveryOneButton)
+//        }
+//        alertController.addAction(deleteButton)
+//        alertController.addAction(cancelAction)
+//        self.present(alertController, animated: true, completion: nil)
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
@@ -247,28 +251,31 @@ extension ChatInteractionWindow: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if chatList[indexPath.row].isMe {
+        let message = chatList[indexPath.row]
+        let userId = MyManager.user.userId
+        
+        if message.senderId == userId {
             
-            if chatList[indexPath.row].isImage ?? false {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "MyImageBubble") as! MyImageBubble
-                cell.loadData(chatUser: chatList[indexPath.row])
-                return cell
-            }
+//            if message.messageType == .IMAGE {
+//                let cell = tableView.dequeueReusableCell(withIdentifier: "MyImageBubble") as! MyImageBubble
+//                cell.loadData(chatUser: chatList[indexPath.row])
+//                return cell
+//            }
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageBubble") as! MyMessageBubble
-            cell.loadData(chatUser: chatList[indexPath.row])
+            cell.loadData(chatUser: message)
             return cell
             
         } else {
             
-            if chatList[indexPath.row].isImage ?? false {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "YouImageBubble") as! YouImageBubble
-                cell.loadData(chatUser: chatList[indexPath.row])
-                return cell
-            }
+//            if chatList[indexPath.row].isImage ?? false {
+//                let cell = tableView.dequeueReusableCell(withIdentifier: "YouImageBubble") as! YouImageBubble
+//                cell.loadData(chatUser: chatList[indexPath.row])
+//                return cell
+//            }
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "YouMessageBubble") as! YouMessageBubble
-            cell.loadData(chatUser: chatList[indexPath.row])
+            cell.loadData(chatUser: message)
             return cell
 
         }
