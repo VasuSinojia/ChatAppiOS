@@ -20,3 +20,11 @@ func chatMessageToDictionary(message: ChatMessage) -> [String: Any] {
     "senderId": message.senderId
   ]
 }
+
+func dictionaryToChatMessage(dictionary: [String: Any]) -> ChatMessage {
+    let message = dictionary["message"] as? String
+    let messageTypeRawValue = dictionary["messageType"] as? String
+    let messageType = MessageType(rawValue: messageTypeRawValue ?? "")
+    let senderId = dictionary["senderId"] as? String
+    return ChatMessage(message: message ?? "", messageType: messageType ?? .TEXT, senderId: senderId ?? "")
+}
