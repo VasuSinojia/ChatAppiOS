@@ -8,6 +8,7 @@
 import UIKit
 
 struct ChatUser {
+    let uid: String
     let name: String
     let lastMessage: String
     let pendingMessage: Int
@@ -34,12 +35,11 @@ class ChatListViewController: UIViewController {
             let conversationList = try? await DatabaseManager.sharedInstance.fetchMyConversations()
             if let conversations = conversationList {
                 for conversation in conversations {
-                    chatList.append(ChatUser(name: "\(conversation.firstName ?? "") \(conversation.lastName ?? "")", lastMessage: "hi", pendingMessage: 2, lastMessageDate: "Sun", isMe: false))
+                    chatList.append(ChatUser(uid: conversation.userId ?? "", name: "\(conversation.firstName ?? "") \(conversation.lastName ?? "")", lastMessage: "hi", pendingMessage: 2, lastMessageDate: "Sun", isMe: false))
                 }
             }
             chatListTableView.reloadData()
         }
-        DatabaseManager.sharedInstance.fetchChatsFromConversationId(conversationId: "9dj4zUt8LZmeGOicNQS2")
         chatListTableView.register(UINib(nibName: "ChatCellView", bundle: nil), forCellReuseIdentifier: "cell")
         loadData()
         initDelegate()
@@ -88,8 +88,13 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nextVC = self.storyboard?.instantiateViewController(identifier: "ChatInteractionWindow") as! ChatInteractionWindow
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        let opponentUid = chatList[indexPath.row].uid
+        DatabaseManager.sharedInstance.getConversationId(withOpponentUID: opponentUid) { result, conversationId in
+            if (result) {
+                let nextVC = self.storyboard?.instantiateViewController(identifier: "ChatInteractionWindow") as! ChatInteractionWindow
+                nextVC.conversationId = conversationId
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        }
     }
-    
 }
