@@ -31,8 +31,8 @@ class ChatInteractionWindow: UIViewController {
         initNavbar()
         setProfileViewToNavBar()
         Task {
-            DatabaseManager.sharedInstance.fetchChatsFromConversationId(conversationId: conversationId ?? "") { list  in
-                self.chatList = list
+            DatabaseManager.sharedInstance.fetchChatsFromConversationId(conversationId: conversationId ?? "") { message  in
+                self.chatList.append(message)
                 self.reloadTableView()
             }
         }
