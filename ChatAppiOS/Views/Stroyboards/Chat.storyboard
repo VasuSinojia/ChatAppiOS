@@ -436,6 +436,7 @@
                                 <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="aUW-Bt-MZg"/>
+                                    <constraint firstAttribute="width" constant="50" id="wo5-sd-110"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Logout">
@@ -446,6 +447,11 @@
                                         <real key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="wo5-sd-110"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="logoutBtnAction:" destination="gui-e4-R8I" eventType="touchUpInside" id="ubx-Le-jDp"/>
                                 </connections>
