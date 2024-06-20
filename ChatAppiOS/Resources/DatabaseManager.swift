@@ -194,7 +194,7 @@ extension DatabaseManager {
     
     func fetchChatsFromConversationId(conversationId: String) async throws -> [ChatMessage] {
         var chatMessages : [ChatMessage] = []
-        var snapshot = try await firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS)
+        let snapshot = try await firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS)
             .document(conversationId)
             .collection(Constants.sharedInstance.KEY_CHATS)
             .order(by: "createdAt")
