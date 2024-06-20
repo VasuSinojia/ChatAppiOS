@@ -15,6 +15,7 @@ class ChatInteractionWindow: UIViewController {
     private var chatList: [ChatMessage] = []
     let imagePicker = UIImagePickerController()
     var conversationId: String?
+    var opponentUser: ChatUser?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,7 +106,7 @@ class ChatInteractionWindow: UIViewController {
         imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
         
         let titleLabel = UILabel()
-        titleLabel.text = "Vasu Sinojia"
+        titleLabel.text = opponentUser?.name ?? "User"
         titleLabel.textColor = .white
         
         let stackView = UIStackView(arrangedSubviews: [imageView, titleLabel])

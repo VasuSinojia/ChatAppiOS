@@ -88,11 +88,13 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let opponentUid = chatList[indexPath.row].uid
+        let opponentUser = chatList[indexPath.row]
+        let opponentUid = opponentUser.uid
         DatabaseManager.sharedInstance.getConversationId(withOpponentUID: opponentUid) { result, conversationId in
             if (result) {
                 let nextVC = self.storyboard?.instantiateViewController(identifier: "ChatInteractionWindow") as! ChatInteractionWindow
                 nextVC.conversationId = conversationId
+                nextVC.opponentUser = opponentUser
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }
