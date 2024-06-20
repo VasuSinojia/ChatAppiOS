@@ -192,22 +192,24 @@ extension DatabaseManager {
         completion(true, conversationID)
     }
     
-    func fetchChatsFromConversationId(conversationId: String) async throws -> [ChatMessage] {
+    func fetchChatsFromConversationId(conversationId: String, completion: @escaping ([ChatMessage]) -> Void) {
         var chatMessages : [ChatMessage] = []
-        let snapshot = try await firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS)
+        let snapshot = firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS)
             .document(conversationId)
             .collection(Constants.sharedInstance.KEY_CHATS)
             .order(by: "createdAt")
-            .getDocuments()
-        
-        let documents = snapshot.documents
-        if (!documents.isEmpty) {
-            for document in documents {
-                let message = dictionaryToChatMessage(dictionary: document.data())
-                chatMessages.append(message)
-            }
-        }
-        return chatMessages
+            .addSnapshotListener({ snapshot, error in
+                if let snapshot = snapshot {
+                    let documents = snapshot.documents
+                    if (!documents.isEmpty) {
+                        for document in documents {
+                            let message = dictionaryToChatMessage(dictionary: document.data())
+                            chatMessages.append(message)
+                        }
+                    }
+                    completion(chatMessages)
+                }
+            })
     }
 }
 

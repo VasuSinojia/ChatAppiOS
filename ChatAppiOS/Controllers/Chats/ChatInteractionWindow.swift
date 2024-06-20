@@ -31,8 +31,10 @@ class ChatInteractionWindow: UIViewController {
         initNavbar()
         setProfileViewToNavBar()
         Task {
-            chatList = try await DatabaseManager.sharedInstance.fetchChatsFromConversationId(conversationId: conversationId ?? "")
-            reloadTableView()
+            DatabaseManager.sharedInstance.fetchChatsFromConversationId(conversationId: conversationId ?? "") { list  in
+                self.chatList = list
+                self.reloadTableView()
+            }
         }
         
         scrollTableViewToBottom()
