@@ -35,6 +35,7 @@ class ChatInteractionWindow: UIViewController {
             DatabaseManager.sharedInstance.fetchChatsFromConversationId(conversationId: conversationId ?? "") { message  in
                 self.chatList.append(message)
                 self.reloadTableView()
+                self.scrollTableViewToBottom()
             }
         }
         
