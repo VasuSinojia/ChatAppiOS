@@ -88,7 +88,8 @@ class ChatInteractionWindow: UIViewController {
     private func sendMessage() {
         let messageText = messsageTextField.text ?? ""
         let userId = MyManager.user.userId ?? ""
-        let message = ChatMessage(message: messageText, messageType: .TEXT, senderId: userId)
+        let currentTime = Date()
+        let message = ChatMessage(message: messageText, messageType: .TEXT, senderId: userId,createdAt: currentTime)
         if (conversationId != nil) {
             DatabaseManager.sharedInstance.sendMessage(conversationId: conversationId!, chatMessage: message)
         }

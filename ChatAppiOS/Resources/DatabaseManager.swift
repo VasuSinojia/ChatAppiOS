@@ -197,6 +197,7 @@ extension DatabaseManager {
         var snapshot = try await firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS)
             .document(conversationId)
             .collection(Constants.sharedInstance.KEY_CHATS)
+            .order(by: "createdAt")
             .getDocuments()
         
         let documents = snapshot.documents
