@@ -63,17 +63,15 @@ extension NewChatViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DatabaseManager.sharedInstance.getUser(uid: dataSource[indexPath.row].userId ?? "") { receiverUser in
-            print("receiver user email \(receiverUser.email)")
-            print("receiver user uid \(receiverUser.userId)")
+            print("receiver user email \(receiverUser.email ?? "")")
+            print("receiver user uid \(receiverUser.userId ?? "")")
             
-            let currentUserUid = Auth.auth().currentUser!.uid
             let selectedUserUid: String = receiverUser.userId ?? ""
-            var arrUid = [currentUserUid, selectedUserUid]
-            arrUid.sort()
-            let chatId = arrUid.joined(separator: "_")
-            print("chatId \(chatId)")
-            DatabaseManager.sharedInstance.checkAndCreateNewConversation(conversationId: chatId) {
-                print("check firestore")
+            if (!selectedUserUid.isEmpty) {
+                DatabaseManager.sharedInstance.getConversationId(withOpponentUID: selectedUserUid) { success, conversationId in
+                    print("success \(success)")
+                    print("conversationId \(conversationId)")
+                }
             }
         }
     }

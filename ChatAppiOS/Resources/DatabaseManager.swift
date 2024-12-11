@@ -14,7 +14,6 @@ class DatabaseManager {
     
     static let sharedInstance = DatabaseManager()
     
-//    private let database = FirebaseDatabase.Database.database().reference()
     private let firestoreDB = Firestore.firestore()
 }
 
@@ -79,18 +78,153 @@ extension DatabaseManager {
             }
         }
     }
+    
+    public func getAsyncUser(uid: String) async throws -> UserModel? {
+        let collectionRef = firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_USER)
+        let documentsSnapshot = try? await collectionRef.whereField("userId", isEqualTo: uid).getDocuments()
+        if !(documentsSnapshot?.isEmpty ?? true) {
+            if let documents = documentsSnapshot?.documents {
+                for document in documents {
+                    do {
+                        let data = try JSONSerialization.data(withJSONObject: document.data())
+                        let userModel = try? JSONDecoder().decode(UserModel.self, from: data)
+                        return userModel ?? UserModel()
+                    } catch {
+                        
+                    }
+                }
+            }
+        }
+        return nil
+    }
 }
 
 extension DatabaseManager {
-    public func checkAndCreateNewConversation(conversationId: String,completionHandler: @escaping () -> Void) {
-        firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS).getDocuments { snapshot, error in
-            if let documents = snapshot?.documents {
-                let documentFound = documents.contains { $0.documentID == conversationId }
-                if !documentFound {
-                    self.firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS).document(conversationId).setData(["message" : "Hi"])
+    
+    func fetchMyConversations() async throws -> [UserModel] {
+        let currentUserID = MyManager.user.userId ?? ""
+        let conversationsRef = firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS)
+        
+        let documentsSnapshot = try await conversationsRef.whereField(Constants.sharedInstance.KEY_PARTICIPANTS, arrayContains: currentUserID).getDocuments()
+        
+        var conversationList : [UserModel] = []
+        
+        if (!documentsSnapshot.isEmpty) {
+            for document in documentsSnapshot.documents {
+                let data = document.data()
+                let participants = data["participants"] as! [String]
+                let opponent = participants.first { ele in
+                    ele != currentUserID
                 }
-                completionHandler()
+                if let opponentId = opponent {
+                    let receivedUser = try? await getAsyncUser(uid: opponentId)
+                    if let user = receivedUser {
+                        conversationList.append(user)
+                    }
+                }
+            }
+            return conversationList
+        }
+        
+     return conversationList
+    }
+    
+    // Checking if conversation exists (assuming you have opponentUID)
+    func getConversationId(withOpponentUID opponentUID: String, completion: @escaping (Bool, String?) -> Void) {
+        let currentUserID = MyManager.user.userId ?? ""
+      let conversationsRef = firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS)
+        conversationsRef.whereField(Constants.sharedInstance.KEY_PARTICIPANTS,arrayContains: currentUserID).getDocuments { (snapshot, error) in
+            if let _ = error {
+                completion(false , "")
+                return
+            }
+            
+            guard let documents = snapshot?.documents, !documents.isEmpty else {
+                self.createConversations(withOpponentUID: opponentUID) { isCreated, conversationId in
+                    if isCreated && !(conversationId?.isEmpty ?? true) {
+                        print("Created A conversation successfully")
+                        completion(true, conversationId)
+                    } else {
+                        print("Error createing a A conversation")
+                        completion(false, "")
+                    }
+                }
+                return
+            }
+            
+            for document in documents {
+                let participants = document.data()[Constants.sharedInstance.KEY_PARTICIPANTS] as? [String]
+                if let participants = participants, participants.contains(currentUserID) && participants.contains(opponentUID) {
+                    let conversationID = document.documentID
+                    completion(true, conversationID)
+                    return
+                }
+            }
+            
+            self.createConversations(withOpponentUID: opponentUID) { isCreated, conversationId in
+                if isCreated && !(conversationId?.isEmpty ?? true) {
+                    print("Created A conversation successfully")
+                    completion(true, conversationId)
+                } else {
+                    print("Error createing a A conversation")
+                    completion(false, "")
+                }
             }
         }
+    }
+    
+    // Checking if conversation exists (assuming you have opponentUID)
+    func createConversations(withOpponentUID opponentUID: String, completion: @escaping (Bool, String?) -> Void) {
+        let currentUserID = MyManager.user.userId ?? ""
+        let conversationsRef = firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS).document()
+        let conversationID = conversationsRef.documentID
+        
+        conversationsRef.setData([
+            "id": conversationID,
+            "participants": [currentUserID, opponentUID],
+          ], completion: { (error) in
+            if let _ = error {
+              completion(false, "")
+              return
+            }
+          })
+        
+        completion(true, conversationID)
+    }
+    
+    func fetchChatsFromConversationId(conversationId: String, completion: @escaping (ChatMessage) -> Void) {
+        let snapshot = firestoreDB.collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS)
+            .document(conversationId)
+            .collection(Constants.sharedInstance.KEY_CHATS)
+            .order(by: "createdAt")
+            .addSnapshotListener({ snapshot, error in
+                if let snapshot = snapshot {
+                    let documentChanges = snapshot.documentChanges
+                    for change in documentChanges {
+                        switch(change.type) {
+                        case .added:
+                            print("change type added")
+                            let messageDoc = change.document
+                            let message = dictionaryToChatMessage(dictionary: messageDoc.data())
+                            completion(message)
+                        case .modified:
+                            print("change type modified")
+                        case .removed:
+                            print("change type removed")
+                        }
+                    }
+                }
+            })
+    }
+}
+
+extension DatabaseManager {
+    func sendMessage(conversationId: String, chatMessage: ChatMessage) {
+        let message = chatMessageToDictionary(message: chatMessage)
+        firestoreDB
+            .collection(Constants.sharedInstance.KEY_COLLECTION_CONVERSATIONS)
+            .document(conversationId)
+            .collection(Constants.sharedInstance.KEY_CHATS)
+            .addDocument(data: message)
     }
 }

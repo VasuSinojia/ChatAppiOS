@@ -8,6 +8,7 @@
 import UIKit
 
 struct ChatUser {
+    let uid: String
     let name: String
     let lastMessage: String
     let pendingMessage: Int
@@ -20,6 +21,7 @@ struct ChatUser {
 class ChatListViewController: UIViewController {
     
     @IBOutlet weak var chatListTableView: UITableView!
+    @IBOutlet weak var txtUserName: UILabel!
     private var chatList: [ChatUser] = []
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,16 +31,24 @@ class ChatListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Task {
+            let conversationList = try? await DatabaseManager.sharedInstance.fetchMyConversations()
+            if let conversations = conversationList {
+                for conversation in conversations {
+                    chatList.append(ChatUser(uid: conversation.userId ?? "", name: "\(conversation.firstName ?? "") \(conversation.lastName ?? "")", lastMessage: "hi", pendingMessage: 2, lastMessageDate: "Sun", isMe: false))
+                }
+            }
+            chatListTableView.reloadData()
+        }
         chatListTableView.register(UINib(nibName: "ChatCellView", bundle: nil), forCellReuseIdentifier: "cell")
-
+        loadData()
         initDelegate()
-        chatList = [
-            ChatUser(name: "Vasu", lastMessage: "Hi I am here", pendingMessage: 3, lastMessageDate: "Sun", isMe : false),
-            ChatUser(name: "Zahir", lastMessage: "Andriod Studio Upgraded", pendingMessage: 2, lastMessageDate: "Wed", isMe : false),
-            ChatUser(name: "Ajju bhai", lastMessage: "Score to jo lala", pendingMessage: 1, lastMessageDate: "Today", isMe : false),
-            ChatUser(name: "Asgar", lastMessage: "Happy Birthday Sir", pendingMessage: 1, lastMessageDate: "Yesterday", isMe : false)
-        ]
         // Do any additional setup after loading the view.
+    }
+    
+    private func loadData() {
+        var user = MyManager.getUserData()
+        txtUserName.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
     }
     
     
@@ -78,8 +88,15 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nextVC = self.storyboard?.instantiateViewController(identifier: "ChatInteractionWindow") as! ChatInteractionWindow
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        let opponentUser = chatList[indexPath.row]
+        let opponentUid = opponentUser.uid
+        DatabaseManager.sharedInstance.getConversationId(withOpponentUID: opponentUid) { result, conversationId in
+            if (result) {
+                let nextVC = self.storyboard?.instantiateViewController(identifier: "ChatInteractionWindow") as! ChatInteractionWindow
+                nextVC.conversationId = conversationId
+                nextVC.opponentUser = opponentUser
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        }
     }
-    
 }

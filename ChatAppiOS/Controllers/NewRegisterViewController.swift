@@ -23,7 +23,8 @@ class NewRegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
-
+        txtPassword.textContentType = .oneTimeCode
+        txtRePassword.textContentType = .oneTimeCode
         // Do any additional setup after loading the view.
     }
     @IBAction func btnBackTapped(_ sender: UIButton) {
